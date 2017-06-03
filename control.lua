@@ -341,23 +341,12 @@ local function create_factory_position()
 	local cx = 16*(n % 8)
 	local cy = 16*math.floor(n / 8)
 	
-	-- To make void chunks show up on the map, you need to tell them they've finished generating.
-	surface.set_chunk_generated_status({cx-2, cy-2}, defines.chunk_generated_status.entities)
-	surface.set_chunk_generated_status({cx-1, cy-2}, defines.chunk_generated_status.entities)
-	surface.set_chunk_generated_status({cx+0, cy-2}, defines.chunk_generated_status.entities)
-	surface.set_chunk_generated_status({cx+1, cy-2}, defines.chunk_generated_status.entities)
-	surface.set_chunk_generated_status({cx-2, cy-1}, defines.chunk_generated_status.entities)
-	surface.set_chunk_generated_status({cx-1, cy-1}, defines.chunk_generated_status.entities)
-	surface.set_chunk_generated_status({cx+0, cy-1}, defines.chunk_generated_status.entities)
-	surface.set_chunk_generated_status({cx+1, cy-1}, defines.chunk_generated_status.entities)
-	surface.set_chunk_generated_status({cx-2, cy+0}, defines.chunk_generated_status.entities)
-	surface.set_chunk_generated_status({cx-1, cy+0}, defines.chunk_generated_status.entities)
-	surface.set_chunk_generated_status({cx+0, cy+0}, defines.chunk_generated_status.entities)
-	surface.set_chunk_generated_status({cx+1, cy+0}, defines.chunk_generated_status.entities)
-	surface.set_chunk_generated_status({cx-2, cy+1}, defines.chunk_generated_status.entities)
-	surface.set_chunk_generated_status({cx-1, cy+1}, defines.chunk_generated_status.entities)
-	surface.set_chunk_generated_status({cx+0, cy+1}, defines.chunk_generated_status.entities)
-	surface.set_chunk_generated_status({cx+1, cy+1}, defines.chunk_generated_status.entities)
+	-- To make void chunks show up on the map, you need to tell them they've finished generating. Condense Code
+	for i=-2, 1, 1 do
+    		for j=-2, 1, 1 do
+			surface.set_chunk_generated_status({cx+j, cy+i}, defines.chunk_generated_status.entities)
+    		end
+	end
 	
 	local factory = {}
 	factory.inside_surface = surface
